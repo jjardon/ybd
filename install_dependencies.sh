@@ -44,6 +44,6 @@ if [ $? -ne 0 ]; then
     sudo rm get-pip.py
 fi
 
-sudo pip install fs pyyaml sandboxlib requests
+sudo pip install fs pyyaml sandboxlib requests backports.lzma
 sudo pip install jsonschema bottle cherrypy riemann-client
 sudo pip install pep8

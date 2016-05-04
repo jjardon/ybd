@@ -27,7 +27,7 @@ if you trust the Python Package Index (PyPI) and pip is available on your
 machine, you can install these dependencies with:
 
 ```
-    pip install fs pyyaml sandboxlib requests jsonschema bottle cherrypy riemann-client
+    pip install fs pyyaml sandboxlib requests jsonschema bottle cherrypy riemann-client backports.lzma
 ```
 
 If you need to install pip itself:

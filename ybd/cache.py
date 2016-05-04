@@ -134,8 +134,8 @@ def cache(defs, this):
         shutil.move('%s.tar' % cachefile, cachefile)
     else:
         utils.set_mtime_recursively(this['install'])
-        utils.make_deterministic_gztar_archive(cachefile, this['install'])
-        shutil.move('%s.tar.gz' % cachefile, cachefile)
+        utils.make_xztar_archive(cachefile, this['install'])
+        shutil.move('%s.tar.xz' % cachefile, cachefile)
 
     app.config['counter'].increment()
 
