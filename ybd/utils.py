@@ -15,6 +15,10 @@
 # =*= License: GPL-2 =*=
 
 import gzip
+try:
+    import lzma
+except ImportError:
+    from backports import lzma
 import tarfile
 import contextlib
 import os
@@ -225,6 +229,26 @@ def _process_list(srcdir, destdir, filelist, actionfunc):
             # Unsupported type.
             raise IOError('Cannot extract %s into staging-area. Unsupported'
                           ' type.' % srcpath)
+
+
+def make_xztar_archive(base_name, root_dir):
+    '''Make a xz tar archive of contents of 'root_dir'.
+    '''
+    def add_directory_to_tarfile(f_tar, dir_name, dir_arcname):
+        for filename in sorted(os.listdir(dir_name)):
+            name = os.path.join(dir_name, filename)
+            arcname = os.path.join(dir_arcname, filename)
+
+            f_tar.add(name=name, arcname=arcname, recursive=False)
+
+            if os.path.isdir(name) and not os.path.islink(name):
+                add_directory_to_tarfile(f_tar, name, arcname)
+
+    with open(base_name + '.tar.xz', 'wb') as f:
+        xz_context = lzma.LZMAFile(filename=f, mode='wb', preset=9)
+        with xz_context as f_xz:
+            with tarfile.TarFile(mode='w', fileobj=f_xz) as f_tar:
+                add_directory_to_tarfile(f_tar, root_dir, '.')
 
 
 def make_deterministic_gztar_archive(base_name, root_dir, time=1321009871.0):
