@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from builtins import object
 # Copyright (C) 2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -53,7 +54,7 @@ class Pots(object):
                 return self._data.get(dn)
             log(dn, 'Unable to find definition for', dn, exit=True)
 
-        return self._data.get(dn.get('path', dn.keys()[0]))
+        return self._data.get(dn.get('path', list(dn.keys())[0]))
 
     def _save_pots(self, filename):
         with open(filename, 'w') as f:

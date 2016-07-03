@@ -1,5 +1,10 @@
 from __future__ import print_function
 from __future__ import absolute_import
+from __future__ import division
+from builtins import str
+from builtins import range
+from past.utils import old_div
+from builtins import object
 # Copyright (C) 2014-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -187,7 +192,7 @@ def setup(args):
     base_dir = os.environ.get('XDG_CACHE_HOME') or os.path.expanduser('~')
     config.setdefault('base',
                       os.path.join(base_dir, config['directories']['base']))
-    for directory, path in config.get('directories', {}).items():
+    for directory, path in list(config.get('directories', {}).items()):
         try:
             if config.get(directory) is None:
                 if path is None:
@@ -215,8 +220,8 @@ def setup(args):
         # users should set values based on workload and build infrastructure
         # FIXME: more testing :)
         if cpu_count() >= 10:
-            config['instances'] = 1 + (cpu_count() / 10)
-            config['max-jobs'] = cpu_count() / config['instances']
+            config['instances'] = 1 + (old_div(cpu_count(), 10))
+            config['max-jobs'] = old_div(cpu_count(), config['instances'])
 
     config['pid'] = os.getpid()
     config['counter'] = Counter()
@@ -232,7 +237,7 @@ def load_configs(config_files):
                     return
             log('SETUP', 'Setting config from %s:' % config_file)
 
-            for key, value in yaml.safe_load(text).items():
+            for key, value in list(yaml.safe_load(text).items()):
                 config[key.replace('_', '-')] = value
                 msg = value if 'PASSWORD' not in key.upper() else '(hidden)'
                 print('   %s=%s' % (key.replace('_', '-'), msg))

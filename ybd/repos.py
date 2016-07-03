@@ -1,4 +1,6 @@
 from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
 # Copyright (C) 2011-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -30,8 +32,8 @@ import tempfile
 
 if sys.version_info.major == 2:
     # For compatibility with Python 2.
-    from ConfigParser import RawConfigParser
-    from StringIO import StringIO
+    from configparser import RawConfigParser
+    from io import StringIO
 else:
     from configparser import RawConfigParser
     from io import StringIO
@@ -39,7 +41,7 @@ else:
 
 def get_repo_url(repo):
     if repo:
-        for alias, url in app.config.get('aliases', {}).items():
+        for alias, url in list(app.config.get('aliases', {}).items()):
             repo = repo.replace(alias, url)
         if repo[:4] == "http" and not repo.endswith('.git'):
             repo = repo + '.git'

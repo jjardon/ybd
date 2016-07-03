@@ -24,6 +24,7 @@ These definitions shall be used if no DEFAULTS file is present.
 
 '''
 from __future__ import absolute_import
+from builtins import object
 
 import os
 from . import app

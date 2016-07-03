@@ -268,8 +268,8 @@ def gather_integration_commands(dn):
 
     def _gather_recursively(component, commands):
         if 'system-integration' in component:
-            for product, it in component['system-integration'].iteritems():
-                for name, cmdseq in it.iteritems():
+            for product, it in component['system-integration'].items():
+                for name, cmdseq in it.items():
                     commands["%s-%s" % (name, product)] = cmdseq
         for subcomponent in component.get('contents', []):
             _gather_recursively(app.defs.get(subcomponent), commands)

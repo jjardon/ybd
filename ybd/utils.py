@@ -1,5 +1,6 @@
 from __future__ import print_function
 from __future__ import absolute_import
+from builtins import map
 # Copyright (C) 2011-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -363,7 +364,7 @@ def _find_extensions(paths):
 
     extension_kinds = ['check', 'configure', 'write']
     efs = MultiFS()
-    map(lambda x: efs.addfs(x, OSFS(x)), paths)
+    list(map(lambda x: efs.addfs(x, OSFS(x)), paths))
 
     def get_extensions(kind):
         return {os.path.splitext(x)[0]: efs.getsyspath(x)

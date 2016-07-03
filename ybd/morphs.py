@@ -1,4 +1,7 @@
 from __future__ import absolute_import
+from builtins import str
+from builtins import range
+from builtins import object
 # Copyright (C) 2014-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -208,7 +211,7 @@ class Morphs(object):
         return new_def['path']
 
     def _demorph(self, path):
-        if config.get('artifact-version', 0) not in range(0, 4):
+        if config.get('artifact-version', 0) not in list(range(0, 4)):
             if path.endswith('.morph'):
                 path = path.rpartition('.morph')[0]
         return path

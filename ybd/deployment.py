@@ -53,14 +53,14 @@ def deploy_system(system_spec, parent_location=''):
 
         for subsystem in system_spec.get('subsystems', []):
             if deploy_defaults:
-                subsystem = dict(deploy_defaults.items() + subsystem.items())
+                subsystem = dict(list(deploy_defaults.items()) + list(subsystem.items()))
             deploy_system(subsystem, parent_location=system['sandbox'])
 
-        for name, deployment in system_spec.get('deploy', {}).iteritems():
+        for name, deployment in system_spec.get('deploy', {}).items():
             method = deployment.get('type') or deployment.get('upgrade-type')
             method = os.path.basename(method)
             if deploy_defaults:
-                deployment = dict(deploy_defaults.items() + deployment.items())
+                deployment = dict(list(deploy_defaults.items()) + list(deployment.items()))
             do_deployment_manifest(system, deployment)
             if parent_location:
                 for l in ['location', 'upgrade-location']:

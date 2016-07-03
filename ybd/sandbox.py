@@ -1,4 +1,6 @@
 from __future__ import absolute_import
+from builtins import map
+from builtins import str
 # Copyright (C) 2011-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -211,7 +213,7 @@ def run_extension(dn, deployment, step, method):
     else:
         envlist.append('PYTHONPATH=%s' % app.config['extsdir'])
 
-    for key, value in deployment.iteritems():
+    for key, value in deployment.items():
         if key.isupper():
             envlist.append("%s=%s" % (key, value))
 

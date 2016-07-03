@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from builtins import range
 # Copyright (C) 2014-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -37,7 +38,7 @@ def install_split_artifacts(dn):
     for i in app.defs.defaults.get_split_rules('stratum'):
         all_splits += [i['artifact']]
     for index, content in enumerate(dn['contents']):
-        for stratum, artifacts in content.items():
+        for stratum, artifacts in list(content.items()):
             if artifacts == []:
                 if config.get('default-splits', []) != []:
                     for split in config.get('default-splits'):
@@ -49,7 +50,7 @@ def install_split_artifacts(dn):
         dn['contents'][index] = {stratum: artifacts}
 
     for content in dn['contents']:
-        key = content.keys()[0]
+        key = list(content.keys())[0]
         stratum = app.defs.get(key)
         move_required_files(dn, stratum, content[key])
 
@@ -90,7 +91,7 @@ def move_required_files(dn, stratum, artifacts):
                 split_metadata = {'ref': metadata.get('ref'),
                                   'repo': metadata.get('repo'),
                                   'products': []}
-                if config.get('artifact-version', 0) not in range(0, 1):
+                if config.get('artifact-version', 0) not in list(range(0, 1)):
                     metadata['cache'] = dn.get('cache')
 
                 for product in metadata['products']:
@@ -210,10 +211,9 @@ def write_chunk_metafile(chunk):
                 splits[artifact].append(path)
                 break
 
-    all_files = [a for x in splits.values() for a in x]
+    all_files = [a for x in list(splits.values()) for a in x]
     for path in dirs:
-        if not any(map(lambda y: y.startswith(path),
-                   all_files)) and path != '':
+        if not any([y.startswith(path) for y in all_files]) and path != '':
             for artifact, rule in rules:
                 if rule.match(path) or rule.match(path + '/'):
                     splits[artifact].append(path)
@@ -244,11 +244,11 @@ def write_stratum_metafiles(stratum):
                           'repo': metadata.get('repo'),
                           'products': []}
 
-        if config.get('artifact-version', 0) not in range(0, 1):
+        if config.get('artifact-version', 0) not in list(range(0, 1)):
             split_metadata['cache'] = metadata.get('cache')
 
         chunk_artifacts = app.defs.get(chunk).get('artifacts', {})
-        for artifact, target in chunk_artifacts.items():
+        for artifact, target in list(chunk_artifacts.items()):
             splits[target].append(artifact)
 
         for product in metadata['products']:
@@ -275,11 +275,11 @@ def write_metafile(rules, splits, dn):
         metadata['repo'] = dn.get('repo')
         metadata['ref'] = dn.get('ref')
     else:
-        if config.get('artifact-version', 0) not in range(0, 2):
+        if config.get('artifact-version', 0) not in list(range(0, 2)):
             metadata['repo'] = config['defdir']
             metadata['ref'] = config['def-version']
 
-    if config.get('artifact-version', 0) not in range(0, 1):
+    if config.get('artifact-version', 0) not in list(range(0, 1)):
         metadata['cache'] = dn.get('cache')
 
     meta = os.path.join(dn['baserockdir'], dn['name'] + '.meta')

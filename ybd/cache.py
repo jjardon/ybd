@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from builtins import range
 # Copyright (C) 2014-2016 Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -88,7 +89,7 @@ def hash_factors(dn):
         hash_factors[factor] = cache_key(factor)
 
     for factor in dn.get('contents', []):
-        hash_factors[factor.keys()[0]] = cache_key(factor.keys()[0])
+        hash_factors[list(factor.keys())[0]] = cache_key(list(factor.keys())[0])
 
     for factor in ['tree', 'submodules'] + app.defs.defaults.build_steps:
         if dn.get(factor):
