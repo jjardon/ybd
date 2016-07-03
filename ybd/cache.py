@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2014-2016 Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -22,9 +23,9 @@ import os
 import shutil
 from subprocess import call
 
-import app
-from repos import get_repo_url, get_tree
-import utils
+from . import app
+from .repos import get_repo_url, get_tree
+from . import utils
 import tempfile
 import yaml
 import re

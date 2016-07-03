@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2014-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -17,9 +18,9 @@
 import os
 from subprocess import call
 import json
-import app
-import cache
-import sandbox
+from . import app
+from . import cache
+from . import sandbox
 
 
 def deploy(target):

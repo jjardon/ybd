@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2011-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -24,10 +25,10 @@ import stat
 import tempfile
 from subprocess import call, PIPE
 
-import app
-import cache
-import utils
-from repos import get_repo_url
+from . import app
+from . import cache
+from . import utils
+from .repos import get_repo_url
 
 
 # This must be set to a sandboxlib backend before the run_sandboxed() function

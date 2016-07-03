@@ -16,18 +16,20 @@
 # =*= License: GPL-2 =*=
 
 '''A module to build a definition.'''
+from __future__ import print_function
+from __future__ import absolute_import
 
 import os
 import sys
 import fcntl
-import app
-from app import cleanup, config, log, RetryException, setup, spawn, timer
-from assembly import compose
-from deployment import deploy
-from pots import Pots
-import cache
-from release_note import do_release_note
-import sandbox
+from . import app
+from .app import cleanup, config, log, RetryException, setup, spawn, timer
+from .assembly import compose
+from .deployment import deploy
+from .pots import Pots
+from . import cache
+from .release_note import do_release_note
+from . import sandbox
 import sandboxlib
 import yaml
 
@@ -110,7 +112,7 @@ with timer('TOTAL'):
         log('REPRODUCED',
             'Matched %s of' % len(config['reproduced']), config['tasks'])
         for match in config['reproduced']:
-            print match[0], match[1]
+            print(match[0], match[1])
 
     if target.get('kind') == 'cluster' and config.get('fork') is None:
         with timer(target, 'cluster deployment'):

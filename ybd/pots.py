@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -16,9 +17,9 @@
 
 import os
 import yaml
-from app import config, log
-from defaults import Defaults
-from morphs import Morphs
+from .app import config, log
+from .defaults import Defaults
+from .morphs import Morphs
 
 
 # copied from http://stackoverflow.com/questions/21016220

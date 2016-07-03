@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 # Copyright (C) 2014-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -25,8 +27,8 @@ import yaml
 from multiprocessing import cpu_count, Value, Lock
 from subprocess import call
 from fs.osfs import OSFS  # not used here, but we import it to check install
-from repos import get_version
-from cache import cache_key
+from .repos import get_version
+from .cache import cache_key
 try:
     from riemann_client.transport import TCPTransport
     from riemann_client.client import QueuedClient
@@ -102,7 +104,7 @@ def log(dn, message='', data='', verbose=False, exit=False):
     if config.get('instances'):
         entry = str(config.get('fork', 0)) + ' ' + entry
 
-    print(entry),
+    print((entry), end=' ')
     sys.stdout.flush()
 
     if exit:
@@ -233,8 +235,8 @@ def load_configs(config_files):
             for key, value in yaml.safe_load(text).items():
                 config[key.replace('_', '-')] = value
                 msg = value if 'PASSWORD' not in key.upper() else '(hidden)'
-                print '   %s=%s' % (key.replace('_', '-'), msg)
-        print
+                print('   %s=%s' % (key.replace('_', '-'), msg))
+        print()
 
 
 def cleanup(tmpdir):

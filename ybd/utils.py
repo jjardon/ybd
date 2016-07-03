@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import absolute_import
 # Copyright (C) 2011-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -24,7 +26,7 @@ from fs.osfs import OSFS
 from fs.multifs import MultiFS
 import calendar
 
-import app
+from . import app
 
 # The magic number for timestamps: 2011-11-11 11:11:11
 default_magic_timestamp = calendar.timegm([2011, 11, 11, 11, 11, 11])
@@ -150,8 +152,8 @@ def _process_tree(root, srcpath, destpath, actionfunc):
         except:
             import traceback
             traceback.print_exc()
-            print 'destpath is', destpath
-            print 'realpath is', realpath
+            print('destpath is', destpath)
+            print('realpath is', realpath)
 
             app.log('UTILS', 'ERROR: file operation failed', exit=True)
 

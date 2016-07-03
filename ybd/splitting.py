@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2014-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -14,13 +15,13 @@
 #
 # =*= License: GPL-2 =*=
 
-import app
-from app import config, log
-from cache import get_cache
+from . import app
+from .app import config, log
+from .cache import get_cache
 import os
 import re
 import yaml
-from utils import copy_file_list
+from .utils import copy_file_list
 from fs.osfs import OSFS
 
 

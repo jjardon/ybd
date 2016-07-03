@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -15,7 +16,7 @@
 # =*= License: GPL-2 =*=
 
 import yaml
-from app import log, timer, defs
+from .app import log, timer, defs
 
 # Concourse data model:
 # a 'resource' is an input line into a box

@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2015  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -13,13 +14,13 @@
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import app
-import assembly
-import cache
-import defaults
-import morphs
-import pots
-import deployment
-import repos
-import sandbox
-import utils
+from . import app
+from . import assembly
+from . import cache
+from . import defaults
+from . import morphs
+from . import pots
+from . import deployment
+from . import repos
+from . import sandbox
+from . import utils

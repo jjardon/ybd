@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2014-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,14 +21,14 @@ import contextlib
 import fcntl
 import errno
 
-import app
-from app import config, timer, elapsed
-from app import log, log_riemann, lockfile, RetryException
-from cache import cache, cache_key, get_cache, get_remote
-import repos
-import sandbox
+from . import app
+from .app import config, timer, elapsed
+from .app import log, log_riemann, lockfile, RetryException
+from .cache import cache, cache_key, get_cache, get_remote
+from . import repos
+from . import sandbox
 import datetime
-from splitting import write_metadata, install_split_artifacts
+from .splitting import write_metadata, install_split_artifacts
 
 
 def compose(dn):

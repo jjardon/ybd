@@ -23,9 +23,10 @@ repo.
 These definitions shall be used if no DEFAULTS file is present.
 
 '''
+from __future__ import absolute_import
 
 import os
-import app
+from . import app
 import yaml
 
 

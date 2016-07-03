@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2014-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -16,8 +17,8 @@
 
 import yaml
 import os
-from app import chdir, config, log
-from defaults import Defaults
+from .app import chdir, config, log
+from .defaults import Defaults
 
 
 class Morphs(object):
@@ -56,7 +57,7 @@ class Morphs(object):
             with open(path) as f:
                 text = f.read()
             contents = yaml.safe_load(text)
-        except yaml.YAMLError, exc:
+        except yaml.YAMLError as exc:
             log('DEFINITIONS', 'Could not parse %s' % path, exc, exit=True)
         except:
             log('DEFINITIONS', 'WARNING: Unexpected error loading', path)

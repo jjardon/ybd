@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -17,10 +18,10 @@
 import os
 from subprocess import check_output
 import tempfile
-import app
-from app import chdir, config, log
-from morphs import Morphs
-from repos import explore, get_last_tag, get_repo_name, mirror, mirror_has_ref
+from . import app
+from .app import chdir, config, log
+from .morphs import Morphs
+from .repos import explore, get_last_tag, get_repo_name, mirror, mirror_has_ref
 
 
 def do_release_note(release_note):

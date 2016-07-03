@@ -15,6 +15,7 @@
 #
 # =*= License: GPL-2 =*=
 
+from __future__ import print_function
 import os
 import re
 import glob
@@ -115,7 +116,7 @@ class KeyedBinaryArtifactServer(object):
     def post_artifact():
         if app.config['password'] is 'insecure' or \
                 request.forms.get('password') != app.config['password']:
-            print 'Upload attempt: password fail'
+            print('Upload attempt: password fail')
             app.config['last-reject'] = \
                 datetime.now().strftime('%y-%m-%d %H:%M:%S')
             response.status = 401  # unauthorized

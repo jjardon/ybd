@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 # Copyright (C) 2011-2016  Codethink Limited
 #
 # This program is free software; you can redistribute it and/or modify
@@ -22,8 +23,8 @@ import string
 from subprocess import call, check_output
 import sys
 import requests
-import app
-import utils
+from . import app
+from . import utils
 import tempfile
 
 
