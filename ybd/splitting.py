@@ -203,14 +203,16 @@ def write_chunk_metafile(chunk):
     files = fs.walkfiles('.', search='depth')
     dirs = fs.walkdirs('.', search='depth')
 
-    for path in files:
+    for p in files:
         for artifact, rule in rules:
+            path = p.encode('utf-8')
             if rule.match(path):
                 splits[artifact].append(path)
                 break
 
     all_files = [a for x in splits.values() for a in x]
-    for path in dirs:
+    for p in dirs:
+        path = p.encode('utf-8')
         if not any(map(lambda y: y.startswith(path),
                    all_files)) and path != '':
             for artifact, rule in rules:
