@@ -142,7 +142,7 @@ class Morphs(object):
         exit = True if config.get('check-definitions') == 'exit' else False
 
         if type(dn) is not dict:
-            log('DEFINITIONS', 'WARNING: %s contents is not dict:' % str(dn)[0:50])
+            log('DEFINITIONS', 'WARNING: _fix_keys %s contents is not dict:' % str(dn)[0:50])
 
         if dn.get('morph'):
             if not os.path.isfile(dn.get('morph')):
