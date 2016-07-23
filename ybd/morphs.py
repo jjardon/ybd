@@ -46,6 +46,8 @@ class Morphs(object):
                             data['path'] = self._demorph(path[2:])
                             if type(data) is not dict:
                                 log('DEFINITIONS', 'WARNING: %s contents is not dict:' % path,str(dn)[0:50])
+                            if type(data) is dict:
+                                log('DEFINITIONS', 'WARNING: contents is dict:')
                             self._fix_keys(data)
                             self._tidy_and_insert_recursively(data)
 
