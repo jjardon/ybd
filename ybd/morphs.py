@@ -88,6 +88,8 @@ class Morphs(object):
         '''
         # handle morph syntax oddities...
         for index, component in enumerate(dn.get('build-depends', [])):
+            if type(component) is not dict:
+                log('DEFINITIONS', 'WARNING: tidy contents is not dict:')
             self._fix_keys(component)
             dn['build-depends'][index] = self._insert(component)
 
@@ -108,6 +110,8 @@ class Morphs(object):
 
         lookup = {}
         for index, component in enumerate(dn['contents']):
+            if type(component) is not dict:
+                log('DEFINITIONS', 'WARNING: _tydy2 contents is not dict:')
             self._fix_keys(component, dn['path'])
             lookup[component['name']] = component['path']
             if component['name'] == dn['name']:
@@ -118,6 +122,8 @@ class Morphs(object):
                     # it is defined as a build depend, but hasn't actually been
                     # defined yet...
                     dependency = {'name': it}
+                    if type(dependency) is not dict:
+                        log('DEFINITIONS', 'WARNING: _tydy2 contents is not dict:')
                     self._fix_keys(dependency,  dn['path'])
                     lookup[it] = dependency['path']
                 component['build-depends'][x] = lookup[it]
@@ -145,6 +151,10 @@ class Morphs(object):
 
         if type(dn) is not dict:
             log('DEFINITIONS', 'WARNING: _fix_keys %s contents is not dict:' % str(dn)[0:50])
+        if type(dn) is dict:
+            log('DEFINITIONS', 'WARNING: _fix_keys %s contents is dict:')
+
+
 
         if dn.get('morph'):
             if not os.path.isfile(dn.get('morph')):
