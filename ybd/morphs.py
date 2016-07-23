@@ -14,6 +14,7 @@
 #
 # =*= License: GPL-2 =*=
 
+import codecs
 import yaml
 import os
 from app import chdir, config, log
@@ -54,7 +55,7 @@ class Morphs(object):
 
         '''
         try:
-            with open(path) as f:
+            with codecs.open(path,'r','utf-8') as f:
                 text = f.read()
             contents = yaml.safe_load(text)
             for field in contents:
