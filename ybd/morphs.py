@@ -44,6 +44,8 @@ class Morphs(object):
                         data = self._load(path)
                         if data is not None:
                             data['path'] = self._demorph(path[2:])
+                            if type(data) is not dict:
+                                log('DEFINITIONS', 'WARNING: %s contents is not dict:' % path,str(dn)[0:50])
                             self._fix_keys(data)
                             self._tidy_and_insert_recursively(data)
 
@@ -138,6 +140,10 @@ class Morphs(object):
 
         '''
         exit = True if config.get('check-definitions') == 'exit' else False
+
+        if type(dn) is not dict:
+            log('DEFINITIONS', 'WARNING: %s contents is not dict:' % str(dn)[0:50])
+
         if dn.get('morph'):
             if not os.path.isfile(dn.get('morph')):
                 log('DEFINITION', 'WARNING: missing', dn['morph'], exit=exit)
